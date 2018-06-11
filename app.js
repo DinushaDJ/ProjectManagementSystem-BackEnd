@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var catalogRouter = require('./routes/catalog');
 
 var app = express();
 
@@ -13,7 +14,7 @@ var app = express();
 var mongoose = require('mongoose');
 
 //Set up default mongoose connection
-var mongoDB = 'mongodb://127.0.0.1:27017';
+var mongoDB = 'mongodb://127.0.0.1:27017/PMS';
 //mongoose.connect(mongoDB);
 mongoose.connect(mongoDB, function (err, db) {
     assert.equal(null,err);
@@ -40,10 +41,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/catalog', catalogRouter);
 
-// catch 404 and forward to error handler
+// // catch 404 and forward to error handler
+// app.use(function(req, res, next) {
+//   next(createError(404));
+// });
+
+// Catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
