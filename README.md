@@ -1,5 +1,4 @@
 # PMS
-Project Management System
+Project Management System(Backend)
 - NodeJS
--ExpressJS
 

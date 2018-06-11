@@ -2,12 +2,12 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var taskSchema = new Schema({
+var userSchema = new Schema({
 
-    _projectId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Project'
-    },
+    // _projectId: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Project'
+    // },
     username: {
         type: String,
         required: true,
@@ -29,9 +29,9 @@ var taskSchema = new Schema({
 });
 
 //Virtual for Project's URL
-taskSchema.virtual('url').get(function () {
+userSchema.virtual('url').get(function () {
     return '';
 });
 
 //Export model
-module.exports = mongoose.model('User', taskSchema);
+module.exports = mongoose.model('User', userSchema);
