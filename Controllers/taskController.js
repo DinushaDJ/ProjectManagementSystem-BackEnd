@@ -22,6 +22,21 @@ exports.task_list = function(req, res) {
     }).populate('project phase');
 };
 
+exports.task_user_list = function(req, res) {
+    Task.find({},
+        "_id _projectId _phaseId name number start_date end_date priority status percentageComplete description deletedAt"
+        , function (err, result) {
+            if (err) {
+                return res.json({
+                    message: "Unable to get all task",
+                    error: err
+                });
+            }
+            else {
+                return res.json(result);
+            }
+        }).populate('project phase');
+};
 
 // Display detail page for a specific Task.
 exports.task_detail = function(req, res) {
@@ -40,6 +55,22 @@ exports.task_detail = function(req, res) {
     }).populate('employee phase');
 };
 
+// Display detail page for a specific Task.
+exports.task_detail = function(req, res) {
+    Task.findById({'_id': req.params.id},
+        "_id _projectId _phaseId name number start_date end_date priority status percentageComplete description deletedAt"
+        , function (err, result) {
+            if (err) {
+                return res.json({
+                    message: "Unable to get the task",
+                    error: err
+                });
+            }
+            else {
+                return res.json(result);
+            }
+        }).populate('employee phase');
+};
 
 // Display Task create form on GET.
 exports.task_create_get = function(req, res) {
