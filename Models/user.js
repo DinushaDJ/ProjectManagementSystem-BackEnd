@@ -22,9 +22,11 @@ var userSchema = new Schema({
         type: String,
         required: true
     },
-    deletedAt: {
-        type: Date,
-        default: null
+    userType: {
+        type: String,
+        enum: ['Client', 'Member', 'Admin'],
+        required: true,
+        default: 'Member'
     }
 });
 

@@ -1,107 +1,97 @@
-const Task = require('../models/task');
-//const Project = require('../models/project');
+var async = require('async');
+
+const User = require('../Models/user');
+const UserProject = require('../Models/userProject');
 //const Phase = require('../models/phase');
 
 const { validate } = require('indicative');
 
 
-// Display list of all Task.
-exports.task_list = function(req, res) {
-    Task.find({},
-        "_id _projectId _phaseId name number start_date end_date priority status percentageComplete description deletedAt"
+// Display list of all Users.
+exports.user_list = function(req, res) {
+    User.find({},
+        "_id username email password userType"
         , function (err, result) {
             if (err) {
                 return res.json({
-                    message: "Unable to get all task",
+                    message: "Unable to get all Users",
                     error: err
                 });
             }
             else {
                 return res.json(result);
             }
-        }).populate('project phase');
+        })
+        //.populate('project phase');
 };
 
-
-// Display detail page for a specific Task.
-exports.task_detail = function(req, res) {
-    Task.findById({'_id': req.params.id},
-        "_id _projectId _phaseId name number start_date end_date priority status percentageComplete description deletedAt"
+// Display a specific User.
+exports.user_detail = function(req, res) {
+    User.findById({'_id': req.params.id},
+        "_id username email password userType"
         , function (err, result) {
             if (err) {
                 return res.json({
-                    message: "Unable to get the task",
+                    message: "Unable to get the User",
                     error: err
                 });
             }
             else {
                 return res.json(result);
             }
-        }).populate('employee phase');
+        })
+        //.populate('employee phase');
 };
 
-// Display detail page for a specific Task.
-exports.task_detail = function(req, res) {
-    Task.findById({'_id': req.params.id},
-        "_id _projectId _phaseId name number start_date end_date priority status percentageComplete description deletedAt"
-        , function (err, result) {
+//Display all the Projects of an specific User
+exports.user_project_detail = function(req, res) {
+
+    UserProject.find({'_userId': req.params.id},
+        "_projectId",
+        function (err, result) {
             if (err) {
                 return res.json({
-                    message: "Unable to get the task",
+                    message: "Unable to get the User Project",
                     error: err
                 });
             }
             else {
                 return res.json(result);
             }
-        }).populate('employee phase');
+        }).
+        populate({path: '_projectId', select: 'name'});
 };
 
-// Display Task create form on GET.
-exports.task_create_get = function(req, res) {
+// Display User create form on GET.
+exports.user_create_get = function(req, res) {
     res.send('NOT IMPLEMENTED: Task create GET');
 };
 
 
-// Handle Task create on POST.
-exports.task_create_post = function(req, res) {
+// Handle User create on POST.
+exports.user_create_post = function(req, res) {
 
     const data ={
-        name: req.body.name,
-        number: req.body.number,
-        start_date: req.body.start_date,
-        end_date: req.body.end_date,
-        priority: req.body.priority,
-        status: req.body.status,
-        percentageComplete: req.body.percentageComplete,
-        description: req.body.description,
-        deletedAt: req.body.deletedAt
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        userType: req.body.userType
     };
 
     const rules = {
-        name: 'required',
-        number: 'required',
-        start_date: 'required',
-        end_date: 'required',
-        priority: 'required',
-        status: 'required',
-        percentageComplete: 'required',
-        description: 'required',
-        employee: 'alpha_numeric',
-        phase: 'required|alpha_numeric',
+        username: 'required|min:5',
+        email: 'required',
+        password: 'required',
+        userType: 'required'
     };
 
     validate(data, rules)
         .then(() => {
-            const task = new Task({
-                name: req.body.name,
-                number: req.body.number,
-                start_date: req.body.start_date,
-                end_date: req.body.end_date,
-                priority: req.body.priority,
-                status: req.body.status,
-                percentageComplete: req.body.percentageComplete,
-                description: req.body.description,
+            const task = new User({
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password,
+                userType: req.body.userType
             });
             task.save(function (err) {
                 if (err) {
@@ -116,50 +106,54 @@ exports.task_create_post = function(req, res) {
 };
 
 
-// Display Task delete form on GET.
-exports.task_delete_get = function(req, res) {
+// Display User delete form on GET.
+exports.user_delete_get = function(req, res) {
     res.send('NOT IMPLEMENTED: Task delete GET');
 };
 
 
-// Handle Task delete on POST.
-exports.task_delete_post = function(req, res) {
-    Task.findByIdAndDelete(req.params.id, function (err, result) {
-        if (err) {
-            return res.json({
-                message: "Unable to Delete Task",
-                error: err
-            });
-        }
-        else{
-            return res.json({
-                message: "Deleted Successfully",
-                result: result
-            });
+// Handle User delete on POST.
+exports.user_delete_post = function(req, res) {
+    User.findByIdAndDelete(req.params.id, function (err, result) {
+        if(req.body.userType === 'Client')
+        {
+            UserProject.findByIdAndDelete('_projectId',req.params.id);
+            if (err) {
+                return res.json({
+                    message: "Unable to Delete User",
+                    error: err
+                });
+            }
+            else{
+                return res.json({
+                    message: "Deleted Successfully",
+                    result: result
+                });
+            }
         }
     });
 };
 
 
-// Display Task update form on GET.
-exports.task_update_get = function(req, res) {
+// Display User update form on GET.
+exports.user_update_get = function(req, res) {
     res.send('NOT IMPLEMENTED: Task update GET');
 };
 
 
-// Handle Task update on POST.
-exports.task_update_post = function(req, res) {
+// Handle User update on POST.
+exports.user_update_post = function(req, res) {
 
-    var task = new Task(
+    var task = new User(
         {
 
         }
     );
 
-    Task.findByIdAndUpdate(req.params.id, task, {}, function (err, result) {
+    User.findByIdAndUpdate(req.params.id, task, {}, function (err, result) {
         if (err) {
             return res.json({
-                message: "Unable to Update Task",
+                message: "Unable to Update User",
                 error: err
             });
         }

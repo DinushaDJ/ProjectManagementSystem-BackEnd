@@ -1,5 +1,5 @@
 const Project = require('../Models/project');
-const Phase = require('../Models/phase');
+//const User = require('../Models/user');
 
 const { validate } = require('indicative');
 
@@ -18,7 +18,8 @@ exports.project_list = function(req, res) {
             else {
                 return res.json(result);
             }
-        }).populate('user resource');
+        }).
+    populate('_userId _resourceId');
 };
 
 
@@ -26,7 +27,7 @@ exports.project_list = function(req, res) {
 exports.project_detail = function(req, res) {
     Project.findById({'_id': req.params.id},
         "_id _userId _resourceId name type start_date end_date budget status percentageComplete description deletedAt"
-            , function (err, result) {
+        , function (err, result) {
             if (err) {
                 return res.json({
                     message: "Unable to get the project",
@@ -36,7 +37,8 @@ exports.project_detail = function(req, res) {
             else {
                 return res.json(result);
             }
-        }).populate('user resource');
+        })
+        .populate('_userId _resourceId');
 };
 
 // Display Project create form on GET.

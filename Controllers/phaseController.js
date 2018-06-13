@@ -19,7 +19,7 @@ exports.phase_list = function(req, res) {
             else {
                 return res.json(result);
             }
-        }).populate('project');
+        }).populate('_projectId');
 };
 
 // Display detail page for a specific Phase.
@@ -36,7 +36,7 @@ exports.phase_detail = function(req, res) {
             else {
                 return res.json(result);
             }
-        }).populate('project');
+        }).populate('_projectId');
 };
 
 // Display Phase create form on GET.

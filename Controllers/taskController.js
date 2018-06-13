@@ -19,7 +19,7 @@ exports.task_list = function(req, res) {
         else {
             return res.json(result);
         }
-    }).populate('project phase');
+    }).populate('_projectId _phaseId');
 };
 
 exports.task_user_list = function(req, res) {
@@ -35,7 +35,7 @@ exports.task_user_list = function(req, res) {
             else {
                 return res.json(result);
             }
-        }).populate('project phase');
+        }).populate('_projectId _phaseId');
 };
 
 // Display detail page for a specific Task.

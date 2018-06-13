@@ -15,6 +15,7 @@ var Phase = require('./models/phase');
 var Task = require('./models/task');
 var Resource = require('./models/resource');
 var User = require('./models/user');
+var userProject = require('./models/userProject');
 
 
 var mongoose = require('mongoose');
@@ -142,7 +143,7 @@ function userCreate(cb) {
         username: 'DinusDJ',
         email: 'dinusha.jayashan01@gmail.com',
         password: 'dinusha123',
-        deletedAt: null
+        userType: 'Member'
     });
 
     user.save(function (err) {
@@ -153,6 +154,25 @@ function userCreate(cb) {
         console.log('New User ' + user);
         users.push(user);
         cb(null, user)
+    }  );
+}
+
+//populate data to Phase
+function createUserProject(cb) {
+
+    var user_project = new userProject({
+        _projectId: projects[0],
+        _userId: users[0]
+    });
+
+    user_project.save(function (err) {
+        if (err) {
+            cb('phase', null);
+            return
+        }
+        console.log('New userProject ' + user_project);
+        phases.push(user_project);
+        cb(null, user_project)
     }  );
 }
 
@@ -203,7 +223,8 @@ async.series([
         createUserResource,
         createProject,
         createPhase,
-        createTask
+        createTask,
+        createUserProject
     ],
 // Optional callback
     function(err, results) {
