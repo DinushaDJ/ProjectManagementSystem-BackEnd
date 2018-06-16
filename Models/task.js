@@ -4,10 +4,10 @@ var Schema = mongoose.Schema;
 
 var taskSchema = new Schema({
 
-    _projectId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Project'
-    },
+    // _projectId: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Project'
+    // },
     _phaseId: {
         type: Schema.Types.ObjectId,
         ref: 'Phase'
@@ -54,7 +54,7 @@ var taskSchema = new Schema({
 
 //Virtual for Project's URL
 taskSchema.virtual('url').get(function () {
-    return '';
+    return '/task'+this._id;
 });
 
 //Export model

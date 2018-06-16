@@ -42,11 +42,6 @@ exports.resource_detail = function(req, res) {
         //.populate('employee phase');
 };
 
-// Display Resource create form on GET.
-exports.resource_create_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Task create GET');
-};
-
 
 // Handle Resource create on POST.
 exports.resource_create_post = function(req, res) {
@@ -85,12 +80,6 @@ exports.resource_create_post = function(req, res) {
 };
 
 
-// Display Resource delete form on GET.
-exports.resource_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Task delete GET');
-};
-
-
 // Handle Resource delete on POST.
 exports.resource_delete_post = function(req, res) {
     Resource.findByIdAndDelete(req.params.id, function (err, result) {
@@ -110,33 +99,41 @@ exports.resource_delete_post = function(req, res) {
 };
 
 
-// Display Resource update form on GET.
-exports.resource_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Task update GET');
-};
-
-
 // Handle Resource update on POST.
 exports.resource_update_post = function(req, res) {
 
-    var task = new Resource(
-        {
+    const data = {
+        name: req.body.name,
+        type: req.body.type,
+        status: req.body.status,
+        deletedAt: req.body.deletedAt
+    };
 
-        }
-    );
+    const rules = {
+        name: 'required',
+        type: 'required',
+        status: 'required',
+        description: 'required',
+    };
 
-    Resource.findByIdAndUpdate(req.params.id, task, {}, function (err, result) {
-        if (err) {
-            return res.json({
-                message: "Unable to Update Resource",
-                error: err
+    validate(data, rules)
+        .then(() => {
+            Resource.findByIdAndUpdate(req.params.id, data, function (err, result) {
+                if (err) {
+                    return res.json({
+                        message: "Unable to Update Resource",
+                        error: err
+                    });
+                }
+                else {
+                    return res.json({
+                        message: "Updated Successfully",
+                        result: result
+                    });
+                }
             });
-        }
-        else{
-            return res.json({
-                message: "Updated Successfully",
-                result: result
-            });
-        }
-    });
+        })
+        .catch((errors) => {
+            return res.json({errors});
+        });
 };

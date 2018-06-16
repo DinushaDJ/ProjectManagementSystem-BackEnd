@@ -45,7 +45,7 @@ var phaseSchema = new Schema({
 
 //Virtual for Project's URL
 phaseSchema.virtual('url').get(function () {
-    return '';
+    return '/phase'+this._id;
 });
 
 //Export model

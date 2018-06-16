@@ -15,7 +15,7 @@ var Phase = require('./models/phase');
 var Task = require('./models/task');
 var Resource = require('./models/resource');
 var User = require('./models/user');
-var userProject = require('./models/userProject');
+//var userProject = require('./models/userProject');
 
 
 var mongoose = require('mongoose');
@@ -35,7 +35,7 @@ var users = [];
 function projectCreate(cb) {
 
     var project = new Project ({
-        _userId: users[0],
+        _userId: [users[0]],
         _resourceId: resources[0],
         name:'Project Management',
         type:'IT',
@@ -86,7 +86,7 @@ function resourceCreate(cb) {
 function taskCreate(cb) {
 
     var task = new Task({
-        _projectId: projects[0],
+        //_projectId: projects[0],
         _phaseId: phases[0],
         name: 'Phase 1',
         number: 1,
@@ -109,6 +109,7 @@ function taskCreate(cb) {
         cb(null, task)
     }  );
 }
+
 //populate data to Phase
 function phaseCreate(cb) {
 
@@ -139,7 +140,6 @@ function phaseCreate(cb) {
 function userCreate(cb) {
 
     var user = new User({
-        //_projectId: [projects[0]],
         username: 'DinusDJ',
         email: 'dinusha.jayashan01@gmail.com',
         password: 'dinusha123',
@@ -157,24 +157,6 @@ function userCreate(cb) {
     }  );
 }
 
-//populate data to Phase
-function createUserProject(cb) {
-
-    var user_project = new userProject({
-        _projectId: projects[0],
-        _userId: users[0]
-    });
-
-    user_project.save(function (err) {
-        if (err) {
-            cb('phase', null);
-            return
-        }
-        console.log('New userProject ' + user_project);
-        phases.push(user_project);
-        cb(null, user_project)
-    }  );
-}
 
 function createUserResource(cb) {
     async.parallel([
@@ -182,6 +164,7 @@ function createUserResource(cb) {
                 resourceCreate(callback);
             },
             function (callback) {
+                console.log('User');
                 userCreate(callback);
             }
         ],
@@ -223,21 +206,20 @@ async.series([
         createUserResource,
         createProject,
         createPhase,
-        createTask,
-        createUserProject
+        createTask
     ],
 // Optional callback
-    function(err, results) {
-        if (err) {
-            console.log('FINAL ERR: '+err);
-        }
-        else {
-            console.log('All done');
+function(err, results) {
+    if (err) {
+        console.log('FINAL ERR: '+err);
+    }
+    else {
+        console.log('All done');
 
-        }
-        // All done, disconnect from database
-        mongoose.connection.close();
-    });
+    }
+    // All done, disconnect from database
+    mongoose.connection.close();
+});
 
 
 

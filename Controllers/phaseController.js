@@ -1,6 +1,5 @@
 const Phase = require('../Models/phase');
-//const Project = require('../models/project');
-//const Phase = require('../models/phase');
+const Task = require('../Models/task');
 
 const { validate } = require('indicative');
 
@@ -22,7 +21,8 @@ exports.phase_list = function(req, res) {
         }).populate('_projectId');
 };
 
-// Display detail page for a specific Phase.
+
+// Display a specific Phase.
 exports.phase_detail = function(req, res) {
     Phase.findById({'_id': req.params.id},
         "_id _projectId name start_date end_date duration status percentageComplete description deletedAt"
@@ -39,15 +39,12 @@ exports.phase_detail = function(req, res) {
         }).populate('_projectId');
 };
 
-// Display Phase create form on GET.
-exports.phase_create_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Task create GET');
-};
 
 // Handle Phase create on POST.
 exports.phase_create_post = function(req, res) {
 
     const data ={
+        _projectId: req.body._projectId,
         name: req.body.name,
         start_date: req.body.start_date,
         end_date: req.body.end_date,
@@ -59,6 +56,7 @@ exports.phase_create_post = function(req, res) {
     };
 
     const rules = {
+        _projectId: 'required|alpha_numeric',
         name: 'required',
         start_date: 'required',
         end_date: 'required',
@@ -71,6 +69,7 @@ exports.phase_create_post = function(req, res) {
     validate(data, rules)
         .then(() => {
             const phase = new Phase({
+                _projectId: req.body._projectId,
                 name: req.body.name,
                 start_date: req.body.start_date,
                 end_date: req.body.end_date,
@@ -93,12 +92,6 @@ exports.phase_create_post = function(req, res) {
 };
 
 
-// Display Phase delete form on GET.
-exports.phase_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Task delete GET');
-};
-
-
 // Handle Phase delete on POST.
 exports.phase_delete_post = function(req, res) {
     Phase.findByIdAndDelete(req.params.id, function (err, result) {
@@ -109,42 +102,75 @@ exports.phase_delete_post = function(req, res) {
             });
         }
         else{
-            return res.json({
-                message: "Deleted Successfully",
-                result: result
+            //delete all the tasks of project specified by the passed project Id
+            Task.deleteMany({'_phaseId': req.params.id}, function (err, result) {
+                if (err) {
+                    return res.json({
+                        message: "Unable to Delete Task",
+                        error: err
+                    });
+                }
             });
         }
+        return res.json({
+            message: "Deleted Successfully",
+            result: result
+        });
     });
-};
-
-
-// Display Phase update form on GET.
-exports.phase_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Task update GET');
 };
 
 
 // Handle Phase update on POST.
 exports.phase_update_post = function(req, res) {
 
-    var task = new Phase(
-        {
+    const data = {
+        _projectId: req.body._projectId,
+        name: req.body.name,
+        start_date: req.body.start_date,
+        end_date: req.body.end_date,
+        duration: req.body.duration,
+        status: req.body.status,
+        percentageComplete: req.body.percentageComplete,
+        description: req.body.description,
+        deletedAt: req.body.deletedAt
+    };
 
-        }
-    );
+    const rules = {
+        _projectId: 'required|alpha_numeric',
+        name: 'required',
+        start_date: 'required',
+        end_date: 'required',
+        duration: 'required',
+        status: 'required',
+        percentageComplete: 'required',
+        description: 'required',
+    };
 
-    Phase.findByIdAndUpdate(req.params.id, task, {}, function (err, result) {
-        if (err) {
-            return res.json({
-                message: "Unable to Update Task",
-                error: err
+    validate(data, rules)
+        .then(() => {
+            Phase.findByIdAndUpdate(req.params.id, data, function (err, result) {
+                if (err) {
+                    return res.json({
+                        message: "Unable to Update Phase",
+                        error: err
+                    });
+                }
+                else {
+                    return res.json({
+                        message: "Updated Successfully",
+                        result: result
+                    });
+                }
             });
-        }
-        else{
-            return res.json({
-                message: "Updated Successfully",
-                result: result
-            });
-        }
-    });
+        })
+        .catch((errors) => {
+            return res.json({errors});
+        });
+};
+
+
+// Get the tasks of a specific Phase
+exports.phase_task_get = function (req, res) {
+
+    Task.findById()
 };

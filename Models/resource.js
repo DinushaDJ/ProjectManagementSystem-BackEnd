@@ -30,7 +30,7 @@ var recourceSchema = new Schema({
 
 //Virtual for Project's URL
 recourceSchema.virtual('url').get(function () {
-    return '';
+    return '/resource'+this._id;
 });
 
 //Export model

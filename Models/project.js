@@ -4,10 +4,10 @@ var Schema = mongoose.Schema;
 
 var projectSchema = new Schema({
 
-    _userId:{
+    _userId:[{
         type: Schema.Types.ObjectId,
         ref: 'User'
-    },
+    }],
     _resourceId: {
         type: Schema.Types.ObjectId,
         ref: 'Resource'
@@ -45,7 +45,7 @@ var projectSchema = new Schema({
 
 //Virtual for Project's URL
 projectSchema.virtual('url').get(function () {
-    return '';
+    return '/project'+this._id;
 });
 
 //Export model

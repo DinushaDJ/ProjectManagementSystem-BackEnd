@@ -1,14 +1,19 @@
 var async = require('async');
 
 const User = require('../Models/user');
-const UserProject = require('../Models/userProject');
-//const Phase = require('../models/phase');
+const Project = require('../Models/project');
+const Phases = require('../Models/phase');
+const Task = require('../Models/task');
+
+const userMiddleware =  require('../Middleware/user');
+const projectMiddleware =  require('../Middleware/project');
 
 const { validate } = require('indicative');
 
 
 // Display list of all Users.
 exports.user_list = function(req, res) {
+
     User.find({},
         "_id username email password userType"
         , function (err, result) {
@@ -24,6 +29,7 @@ exports.user_list = function(req, res) {
         })
         //.populate('project phase');
 };
+
 
 // Display a specific User.
 exports.user_detail = function(req, res) {
@@ -41,30 +47,6 @@ exports.user_detail = function(req, res) {
             }
         })
         //.populate('employee phase');
-};
-
-//Display all the Projects of an specific User
-exports.user_project_detail = function(req, res) {
-
-    UserProject.find({'_userId': req.params.id},
-        "_projectId",
-        function (err, result) {
-            if (err) {
-                return res.json({
-                    message: "Unable to get the User Project",
-                    error: err
-                });
-            }
-            else {
-                return res.json(result);
-            }
-        }).
-        populate({path: '_projectId', select: 'name'});
-};
-
-// Display User create form on GET.
-exports.user_create_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Task create GET');
 };
 
 
@@ -87,17 +69,17 @@ exports.user_create_post = function(req, res) {
 
     validate(data, rules)
         .then(() => {
-            const task = new User({
+            const user = new User({
                 username: req.body.username,
                 email: req.body.email,
                 password: req.body.password,
                 userType: req.body.userType
             });
-            task.save(function (err) {
+            user.save(function (err) {
                 if (err) {
                     return res.json({err});
                 }
-                return res.json(task);
+                return res.json(user);
             });
         })
         .catch((errors) => {
@@ -106,38 +88,84 @@ exports.user_create_post = function(req, res) {
 };
 
 
-// Display User delete form on GET.
-exports.user_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Task delete GET');
-};
-
-
 // Handle User delete on POST.
 exports.user_delete_post = function(req, res) {
-    User.findByIdAndDelete(req.params.id, function (err, result) {
-        if(req.body.userType === 'Client')
-        {
-            UserProject.findByIdAndDelete('_projectId',req.params.id);
-            if (err) {
-                return res.json({
-                    message: "Unable to Delete User",
-                    error: err
-                });
-            }
-            else{
-                return res.json({
-                    message: "Deleted Successfully",
-                    result: result
-                });
-            }
-        }
+
+    User.find({userType: req.body.userType}, function (err, user) {
+        //check if the user ia a client
+       if(user.userType === 'Client'){
+           //delete the user along with the projects, phases and tasks
+           User.findByIdAndDelete(req.params.id, function (err, result) {
+
+               if (err) {
+                   return res.json({
+                       message: "Unable to Delete User",
+                       error: err
+                   });
+               }
+               else {
+                   userMiddleware.userProjects(req.params.id, function(projects) {
+                       //delete all the phases of project specified by the passed project Id
+                       Project.deleteMany({'_userId': req.params.id}, function (err, result) {
+                           if (err) {
+                               return res.json({
+                                   message: "Unable to Delete Project",
+                                   error: err
+                               });
+                           }
+                           else {
+                               for(let x = 0; x < projects.length; x++){
+                                   projectMiddleware.projectPhases(projects[x],function (phases) {
+
+                                       Phases.deleteMany({'_projectId': projects[x]},function (err, result) {
+                                           if (err) {
+                                               return res.json({
+                                                   message: "Unable to Delete Phase",
+                                                   error: err
+                                               });
+                                           }
+                                           //delete the tasks of each phase
+                                           for(let i=0; i<phases.length; i++) {
+                                               Task.deleteMany({'_phaseId': phases[i]}, function (err, result) {
+                                                   if (err) {
+                                                       return res.json({
+                                                           message: "Unable to Delete Task",
+                                                           error: err
+                                                       });
+                                                   }
+                                               });
+                                           }
+                                       })
+                                   });
+                               }
+                           }
+                       });
+                       return res.json({
+                           message: "Client Deleted Successfully",
+                           result: result
+                       })
+                   });
+               }
+           });
+       }
+       else{
+           //delete a user
+           User.findByIdAndDelete(req.params.id, function (err, result) {
+               if (err) {
+                   return res.json({
+                       message: "Unable to Delete User",
+                       error: err
+                   });
+               }
+               else {
+                   return res.json({
+                       message: "Deleted Successfully",
+                       result: result
+                   });
+               }
+           });
+       }
     });
-};
-
-
-// Display User update form on GET.
-exports.user_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Task update GET');
 };
 
 
@@ -165,3 +193,31 @@ exports.user_update_post = function(req, res) {
         }
     });
 };
+
+
+//Display all the Projects of an specific User
+// exports.user_project_detail = function(req, res) {
+//
+//     UserProject.find({},{'_userId': req.params.id},
+//         //"_projectId",
+//         function (err, result) {
+//             if (err) {
+//                 return res.json({
+//                     message: "Unable to get the User Project",
+//                     error: err
+//                 });
+//             }
+//             else {
+//                 return res.json(result);
+//             }
+//         }).
+//         populate({path: '_projectId', select: 'name'});
+// };
+
+
+// exports.user_project = function(req) {
+//     const userId = User.findById('_id',req.params.id);
+//
+//     //const userProjectId = UserProject(userId.find(''))
+//     console.log(userId);
+// };

@@ -1,5 +1,9 @@
 const Project = require('../Models/project');
 //const User = require('../Models/user');
+const Phase = require('../Models/phase');
+const Task = require('../Models/task');
+
+const projectMiddleware = require('../Middleware/project');
 
 const { validate } = require('indicative');
 
@@ -41,16 +45,13 @@ exports.project_detail = function(req, res) {
         .populate('_userId _resourceId');
 };
 
-// Display Project create form on GET.
-exports.project_create_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Task create GET');
-};
-
 
 // Handle Project create on POST.
 exports.project_create_post = function(req, res) {
 
     const data ={
+        _userId: req.body._userId,
+        _resourceId: req.body._resourceId,
         name: req.body.name,
         type: req.body.type,
         start_date: req.body.start_date,
@@ -63,19 +64,23 @@ exports.project_create_post = function(req, res) {
     };
 
     const rules = {
+        _userId: 'required|alpha_numeric',
+        _resourceId: 'required|alpha_numeric',
         name: 'required',
         type: 'required',
-        start_date: 'required',
-        end_date: 'required',
-        budget: 'required',
-        status: 'required',
+        start_date: 'required|date',
+        end_date: 'required|date',
+        budget: 'required|number',
+        status: 'required|in: Complete,Not Complete, Ongoing',
         percentageComplete: 'required',
-        description: 'required',
+        description: 'required'
     };
 
     validate(data, rules)
         .then(() => {
-            const task = new Project({
+            const project = new Project({
+                _userId: req.body._userId,
+                _resourceId: req.body._resourceId,
                 name: req.body.name,
                 type: req.body.type,
                 start_date: req.body.start_date,
@@ -86,11 +91,11 @@ exports.project_create_post = function(req, res) {
                 description: req.body.description,
                 deletedAt: req.body.deletedAt
             });
-            task.save(function (err) {
+            project.save(function (err) {
                 if (err) {
                     return res.json({err});
                 }
-                return res.json(task);
+                return res.json(project);
             });
         })
         .catch((errors) => {
@@ -99,14 +104,9 @@ exports.project_create_post = function(req, res) {
 };
 
 
-// Display Project delete form on GET.
-exports.project_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Task delete GET');
-};
-
-
 // Handle Project delete on POST.
 exports.project_delete_post = function(req, res) {
+
     Project.findByIdAndDelete(req.params.id, function (err, result) {
         if (err) {
             return res.json({
@@ -114,43 +114,108 @@ exports.project_delete_post = function(req, res) {
                 error: err
             });
         }
-        else{
-            return res.json({
-                message: "Deleted Successfully",
-                result: result
+        else {
+            projectMiddleware.projectPhases(req.params.id, function(phases) {
+                //delete all the phases of project specified by the passed project Id
+                Phase.deleteMany({'project': req.params.id}, function (err, result) {
+                    if (err) {
+                        return res.json({
+                            message: "Unable to Delete Phase",
+                            error: err
+                        });
+                    }
+                    else {
+                        //delete the tasks of each phase
+                        for(let i=0; i<phases.length; i++) {
+                            Task.deleteMany({'_phaseId': phases[i]}, function (err, result) {
+                                if (err) {
+                                    return res.json({
+                                        message: "Unable to Delete Task",
+                                        error: err
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+                return res.json({
+                    message: "Deleted Successfully",
+                    result: result
+                })
             });
         }
     });
-};
-
-
-// Display Project update form on GET.
-exports.project_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Task update GET');
 };
 
 
 // Handle Project update on POST.
 exports.project_update_post = function(req, res) {
 
-    var task = new Project(
-        {
+    const data = {
+        _userId: req.body._userId,
+        _resourceId: req.body._resourceId,
+        name: req.body.name,
+        type: req.body.type,
+        start_date: req.body.start_date,
+        end_date: req.body.end_date,
+        budget: req.body.budget,
+        status: req.body.status,
+        percentageComplete: req.body.percentageComplete,
+        description: req.body.description,
+        deletedAt: req.body.deletedAt
+    };
 
-        }
-    );
+    const rules = {
+        _userId: 'required|alpha_numeric',
+        _resourceId: 'required|alpha_numeric',
+        name: 'required',
+        type: 'required',
+        start_date: 'required|date',
+        end_date: 'required|date',
+        budget: 'required|number',
+        status: 'required|in: Complete,Not Complete, Ongoing',
+        percentageComplete: 'required',
+        description: 'required'
+    };
 
-    Project.findByIdAndUpdate(req.params.id, task, {}, function (err, result) {
-        if (err) {
-            return res.json({
-                message: "Unable to Update Task",
-                error: err
+    validate(data, rules)
+        .then(() => {
+            Project.findByIdAndUpdate(req.params.id, data, function (err, result) {
+                if (err) {
+                    return res.json({
+                        message: "Unable to Update Project",
+                        error: err
+                    });
+                }
+                else {
+                    return res.json({
+                        message: "Updated Successfully",
+                        result: result
+                    });
+                }
             });
-        }
-        else{
-            return res.json({
-                message: "Updated Successfully",
-                result: result
-            });
-        }
-    });
+        })
+        .catch((errors) => {
+            return res.json({errors});
+        });
+
 };
+
+
+//get the phases of a specific project
+// exports.project_phase_list = function (req, res) {
+//
+//     Project.findById({'_phaseId': req.params.id},
+//         , function (err, result) {
+//             if (err) {
+//                 return res.json({
+//                     message: "Unable to get the phase",
+//                     error: err
+//                 });
+//             }
+//             else {
+//                 return res.json(result);
+//             }
+//         })
+//         .populate('_userId _resourceId');
+// };
