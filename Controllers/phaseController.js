@@ -10,13 +10,13 @@ exports.phase_list = function(req, res) {
         "_id _projectId name start_date end_date duration status percentageComplete description deletedAt"
         , function (err, result) {
             if (err) {
-                return res.json({
+                return res.status(404).json({
                     message: "Unable to get all Phases",
                     error: err
                 });
             }
             else {
-                return res.json(result);
+                return res.status(200).json(result);
             }
         }).populate('_projectId');
 };
@@ -24,19 +24,19 @@ exports.phase_list = function(req, res) {
 
 // Display a specific Phase.
 exports.phase_detail = function(req, res) {
-    Phase.findById({'_id': req.params.id},
-        "_id _projectId name start_date end_date duration status percentageComplete description deletedAt"
+    Phase.findById(req.params.id,
+        "_id _projectId _taskId name start_date end_date duration status percentageComplete description deletedAt"
         , function (err, result) {
             if (err) {
-                return res.json({
+                return res.status(404).json({
                     message: "Unable to get the Phase",
                     error: err
                 });
             }
             else {
-                return res.json(result);
+                return res.status(200).json(result);
             }
-        }).populate('_projectId');
+        }).populate('_projectId _taskId');
 };
 
 
@@ -45,6 +45,7 @@ exports.phase_create_POST = function(req, res) {
 
     const data ={
         _projectId: req.body._projectId,
+        _taskId: req.body._taskId,
         name: req.body.name,
         start_date: req.body.start_date,
         end_date: req.body.end_date,
@@ -57,10 +58,11 @@ exports.phase_create_POST = function(req, res) {
 
     const rules = {
         _projectId: 'required|alpha_numeric',
+        _taskId: 'array',
         name: 'required',
         start_date: 'required',
         end_date: 'required',
-        duration: 'requires',
+        duration: 'required',
         status: 'required',
         percentageComplete: 'required',
         description: 'required',
@@ -70,6 +72,7 @@ exports.phase_create_POST = function(req, res) {
         .then(() => {
             const phase = new Phase({
                 _projectId: req.body._projectId,
+                _taskId: req.body._taskId,
                 name: req.body.name,
                 start_date: req.body.start_date,
                 end_date: req.body.end_date,
@@ -81,13 +84,13 @@ exports.phase_create_POST = function(req, res) {
             });
             phase.save(function (err) {
                 if (err) {
-                    return res.json({err});
+                    return res.status(404).json({err});
                 }
-                return res.json(phase);
+                return res.status(200).json(phase);
             });
         })
         .catch((errors) => {
-            return res.json({errors});
+            return res.status(403).json({errors});
         });
 };
 
@@ -96,7 +99,7 @@ exports.phase_create_POST = function(req, res) {
 exports.phase_delete_DELETE = function(req, res) {
     Phase.findByIdAndDelete(req.params.id, function (err, result) {
         if (err) {
-            return res.json({
+            return res.status(404).json({
                 message: "Unable to Delete Phase",
                 error: err
             });
@@ -105,14 +108,14 @@ exports.phase_delete_DELETE = function(req, res) {
             //delete all the tasks of project specified by the passed project Id
             Task.deleteMany({'_phaseId': req.params.id}, function (err, result) {
                 if (err) {
-                    return res.json({
+                    return res.status(404).json({
                         message: "Unable to Delete Task",
                         error: err
                     });
                 }
             });
         }
-        return res.json({
+        return res.status(200).json({
             message: "Deleted Successfully",
             result: result
         });
@@ -125,6 +128,7 @@ exports.phase_update_PUT = function(req, res) {
 
     const data = {
         _projectId: req.body._projectId,
+        _taskId: req.body._taskId,
         name: req.body.name,
         start_date: req.body.start_date,
         end_date: req.body.end_date,
@@ -136,7 +140,8 @@ exports.phase_update_PUT = function(req, res) {
     };
 
     const rules = {
-        _projectId: 'required|alpha_numeric',
+        _projectId: 'required|array',
+        _taskId: 'array',
         name: 'required',
         start_date: 'required',
         end_date: 'required',
@@ -150,13 +155,13 @@ exports.phase_update_PUT = function(req, res) {
         .then(() => {
             Phase.findByIdAndUpdate(req.params.id, data, function (err, result) {
                 if (err) {
-                    return res.json({
+                    return res.status(404).json({
                         message: "Unable to Update Phase",
                         error: err
                     });
                 }
                 else {
-                    return res.json({
+                    return res.status(200).json({
                         message: "Updated Successfully",
                         result: result
                     });
@@ -164,13 +169,27 @@ exports.phase_update_PUT = function(req, res) {
             });
         })
         .catch((errors) => {
-            return res.json({errors});
+            return res.status(403).json({errors});
         });
 };
 
 
 // Get the tasks of a specific Phase
-exports.phase_task_get = function (req, res) {
+exports.phase_task_list = function (req, res) {
 
-    Task.findById()
+    Phase.findById({'_id': req.params.id} , '_taskId'
+        , function (err, result) {
+            if (err) {
+                return res.status(404).json({
+                    message: "Unable to get the Task",
+                    error: err
+                });
+            }
+            else {
+                return res.status(200).json(result);
+            }
+        })
+        .populate({
+            path: '_taskId',
+            select: 'name start_date end_date duration status percentageComplete description'});
 };

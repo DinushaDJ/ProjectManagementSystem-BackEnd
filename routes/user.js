@@ -3,7 +3,8 @@ var router = express.Router();
 
 var authentication = require('../authentication');
 var user_controller = require('../Controllers/userController');
-var userMiddleware = require('../Middleware/user');
+//var userMiddleware = require('../Middleware/user');
+var project_controller = require('../Controllers/projectController');
 
     /// USER ROUTES ///
 
@@ -26,8 +27,14 @@ router.get('/:id', authentication.AdminOnly, user_controller.user_detail);//Admi
 // GET request for list of all Users.
 router.get('/', authentication.AdminOnly, user_controller.user_list);//Admin
 
-//Get the projects of a User
-router.get('/:id/projects', userMiddleware.userProjects);
+//Get the projects of a LoggedIn User
+//router.get('/:id/projects', userMiddleware.userProjects);
+
+//
+router.get('/:userId/projects', user_controller.loggedIn_project);
+
+//
+router.get('/:userId/projects/:id', project_controller.project_detail);
 
 
 module.exports = router;

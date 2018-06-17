@@ -54,8 +54,8 @@ exports.resource_create_POST = function(req, res) {
 
     const rules = {
         name: 'required',
-        type: 'required',
-        status: 'required',
+        type: 'required|in:Equipment,Facility,Funds',
+        status: 'required|in:Available,Not Available',
     };
 
     validate(data, rules)
@@ -68,13 +68,13 @@ exports.resource_create_POST = function(req, res) {
             });
             task.save(function (err) {
                 if (err) {
-                    return res.json({err});
+                    return res.status(404).json({err});
                 }
-                return res.json(task);
+                return res.status(200).json(task);
             });
         })
         .catch((errors) => {
-            return res.json({errors});
+            return res.status(200).json({errors});
         });
 };
 
@@ -83,14 +83,14 @@ exports.resource_create_POST = function(req, res) {
 exports.resource_delete_DELETE = function(req, res) {
     Resource.findByIdAndDelete(req.params.id, function (err, result) {
         if (err) {
-            return res.json({
+            return res.status(404).json({
                 message: "Unable to Delete Resource",
                 error: err
             });
         }
         resourceMiddleware.projectResources(req.params.id, function(resources) {
             if (err) {
-                return res.json({
+                return res.status(404).json({
                     message: "Unable to Delete Resource",
                     error: err
                 });
@@ -99,7 +99,7 @@ exports.resource_delete_DELETE = function(req, res) {
             for(let i = 0; i < resources.length; i++) {
                 resourceMiddleware.deleteResourceIdFromProject(resources[i], req.params.id);
             }
-            return res.json({
+            return res.status(200).json({
                 message: "Deleted Successfully",
                 //result: [resourceArray]
             });
@@ -120,22 +120,21 @@ exports.resource_update_PUT = function(req, res) {
 
     const rules = {
         name: 'required',
-        type: 'required',
-        status: 'required',
-        description: 'required',
+        type: 'required|in:Equipment,Facility,Funds',
+        status: 'required|in:Available,Not Available',
     };
 
     validate(data, rules)
         .then(() => {
             Resource.findByIdAndUpdate(req.params.id, data, function (err, result) {
                 if (err) {
-                    return res.json({
+                    return res.status(404).json({
                         message: "Unable to Update Resource",
                         error: err
                     });
                 }
                 else {
-                    return res.json({
+                    return res.status(200).json({
                         message: "Updated Successfully",
                         result: result
                     });
@@ -143,6 +142,6 @@ exports.resource_update_PUT = function(req, res) {
             });
         })
         .catch((errors) => {
-            return res.json({errors});
+            return res.status(403).json({errors});
         });
 };

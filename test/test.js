@@ -13,9 +13,9 @@ describe('Project', function() {
     //Testing Login
     it('Login', function () {
         var login = {
-            username: "DinushaDJ",
+            username: "Sithira",
             password: "dinusha123",
-            userType: "Member"
+            userType: "Admin"
         };
         var response = chakram.post("http://localhost:3000/login", login);
 
@@ -32,6 +32,7 @@ describe('Project', function() {
         return chakram.wait();
     });
 
+
     //get the list of all the projects
     describe('GET /projects', function() {
         it('returns a list of projects', function() {
@@ -45,17 +46,18 @@ describe('Project', function() {
         });
     });
 
+
     //delete a specific project
-    // describe('DELETE /projects/:id/delete', function() {
-    //     it('delete a project', function() {
-    //         var project_delete = chakram.delete("http://localhost:3000/projects/5b2626186fd1cb4c985237e2/delete", [], {
-    //             headers: {
-    //                 'x-access-token': authToken
-    //             }
-    //         });
-    //         return expect(project_delete).to.have.status(200);
-    //     });
-    // });
+    describe('DELETE /projects/:id/delete', function() {
+        it('delete a project', function() {
+            var project_delete = chakram.delete("http://localhost:3000/projects/5b26c5850e686a400c201b4b/delete", [], {
+                headers: {
+                    'x-access-token': authToken
+                }
+            });
+            return expect(project_delete).to.have.status(200);
+        });
+    });
 
 
     //create a project
@@ -63,8 +65,9 @@ describe('Project', function() {
 
         it('create a project', function() {
             var project = {
-                _userId: ["5b2626186fd1cb4c985237e1"],
-                _resourceId: ["5b2626186fd1cb4c985237e0"],
+                _userId: ["5b26541090ac5e04204319eb"],
+                _resourceId: ["5b26541090ac5e04204319ea"],
+                _phaseId: ["5b26541190ac5e04204319ed"],
                 name : "ADB",
                 type: "database",
                 start_date: Date.now(),
@@ -90,18 +93,19 @@ describe('Project', function() {
 
         it('update a project', function() {
             var project = {
-                _userId: ["5b2626186fd1cb4c985237e1"],
-                _resourceId: ["5b2626186fd1cb4c985237e0"],
+                _userId: ["5b26541090ac5e04204319eb"],
+                _resourceId: ["5b26541090ac5e04204319ea"],
+                //_phaseId: ["5b26541190ac5e04204319ed"],
                 name : "MEAN Stack",
                 type: "Web application",
-                start_date: Date.now(),
-                end_date: Date.now(),
+                start_date: "2017-06-06 05:30:00.000",
+                end_date: "2017-07-06 05:30:00.000",
                 budget: 500000,
                 status: "Ongoing",
                 percentageComplete: 0.0,
                 description: "MEKA AMARUI"
             };
-            var project_put = chakram.put("http://localhost:3000/projects/5b2636683cfb32525c59ed1e/update", project, {
+            var project_put = chakram.put("http://localhost:3000/projects/5b26c5e5418a3438bc9be7d9/update", project, {
                 headers: {
                     'x-access-token': authToken
                 }

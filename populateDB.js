@@ -37,6 +37,7 @@ function projectCreate(cb) {
     var project = new Project ({
         _userId: users[0],
         _resourceId: resources[0],
+        _phase: phases[0],
         name:'Project Management',
         type:'IT',
         start_date:'2017-06-06',
@@ -115,6 +116,7 @@ function phaseCreate(cb) {
 
     var phase = new Phase({
         _projectId: projects[0],
+        _task: tasks[0],
         name: 'Requirement gathering',
         start_date: '2017-06-06',
         end_date: '2017-07-06',
@@ -140,6 +142,7 @@ function phaseCreate(cb) {
 function userCreate(cb) {
 
     var user = new User({
+        _projectId: projects[0],
         username: 'DinushaDJ',
         email: 'dinusha.jayashan01@gmail.com',
         password: 'dinusha123',
@@ -170,6 +173,16 @@ function createUserResource(cb) {
         // optional callback
         cb);
 }
+
+// function createUser(cb) {
+//     async.parallel([
+//             function(callback) {
+//                 userCreate(callback);
+//             }
+//         ],
+//         // optional callback
+//         cb);
+// }
 
 function createProject(cb) {
     async.parallel([

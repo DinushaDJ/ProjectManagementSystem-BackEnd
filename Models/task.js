@@ -4,10 +4,6 @@ var Schema = mongoose.Schema;
 
 var taskSchema = new Schema({
 
-    // _projectId: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Project'
-    // },
     _phaseId: {
         type: Schema.Types.ObjectId,
         ref: 'Phase'

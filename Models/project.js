@@ -12,6 +12,10 @@ var projectSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Resource'
     }],
+    _phaseId: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Phase'
+    }],
     name: {
         type: String,
         required: true

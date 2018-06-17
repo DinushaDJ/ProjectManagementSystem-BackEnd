@@ -5,6 +5,10 @@ var bcrypt = require('bcrypt');
 
 var userSchema = new Schema({
 
+    _projectId: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Project'
+    }],
     username: {
         type: String,
         required: true,

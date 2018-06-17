@@ -8,6 +8,10 @@ var phaseSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Project'
     },
+    _taskId: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Task'
+    }],
     name: {
         type: String,
         required: true

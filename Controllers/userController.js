@@ -18,13 +18,13 @@ exports.user_list = function(req, res) {
         "_id username email password userType"
         , function (err, result) {
             if (err) {
-                return res.json({
+                return res.status(404).json({
                     message: "Unable to get all Users",
                     error: err
                 });
             }
             else {
-                return res.json(result);
+                return res.status(200).json(result);
             }
         })
         //.populate('project phase');
@@ -34,19 +34,19 @@ exports.user_list = function(req, res) {
 // Display a specific User.
 exports.user_detail = function(req, res) {
     User.findById({'_id': req.params.id},
-        "_id username email password userType"
+        "_id _projectId username email password userType"
         , function (err, result) {
             if (err) {
-                return res.json({
+                return res.status(404).json({
                     message: "Unable to get the User",
                     error: err
                 });
             }
             else {
-                return res.json(result);
+                return res.status(200).json(result);
             }
-        })
-        //.populate('employee phase');
+        }).
+        populate('employee phase');
 };
 
 
@@ -54,6 +54,7 @@ exports.user_detail = function(req, res) {
 exports.user_create_POST = function(req, res) {
 
     const data ={
+        _projectId: req.body._projectId,
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
@@ -61,15 +62,17 @@ exports.user_create_POST = function(req, res) {
     };
 
     const rules = {
+        _projectId: 'array',
         username: 'required|min:5',
         email: 'required|email',
-        password: 'required',
+        password: 'required|min:4|max:40',
         userType: 'required'
     };
 
     validate(data, rules)
         .then(() => {
             const user = new User({
+                _projectId: req.body._projectId,
                 username: req.body.username,
                 email: req.body.email,
                 password: req.body.password,
@@ -79,16 +82,16 @@ exports.user_create_POST = function(req, res) {
             user.save(function (err) {
                 if (err)
                 {
-                    return res.json({
+                    return res.status(304).json({
                         error: err,
                         message: "error"
                     });
                 }
-                return res.json(user);
+                return res.status(200).json(user);
             });
         })
         .catch((errors) => {
-            return res.json({errors});
+            return res.status(403).json({errors});
         });
 };
 
@@ -102,7 +105,7 @@ exports.user_delete_DELETE = function(req, res) {
            //delete the user along with the projects, phases and tasks
            User.findByIdAndDelete(req.params.id, function (err, result) {
                if (err) {
-                   return res.json({
+                   return res.status(404).json({
                        message: "Unable to Delete User",
                        error: err
                    });
@@ -113,7 +116,7 @@ exports.user_delete_DELETE = function(req, res) {
                        //delete all the phases of project specified by the passed project Id
                        Project.deleteMany({'_userId': req.params.id}, function (err, result) {
                            if (err) {
-                               return res.json({
+                               return res.status(404).json({
                                    message: "Unable to Delete Project",
                                    error: err
                                });
@@ -124,7 +127,7 @@ exports.user_delete_DELETE = function(req, res) {
 
                                        Phases.deleteMany({'_projectId': projects[x]},function (err, result) {
                                            if (err) {
-                                               return res.json({
+                                               return res.status(404).json({
                                                    message: "Unable to Delete Phase",
                                                    error: err
                                                });
@@ -133,7 +136,7 @@ exports.user_delete_DELETE = function(req, res) {
                                            for(let i=0; i<phases.length; i++) {
                                                Task.deleteMany({'_phaseId': phases[i]}, function (err, result) {
                                                    if (err) {
-                                                       return res.json({
+                                                       return res.status(404).json({
                                                            message: "Unable to Delete Task",
                                                            error: err
                                                        });
@@ -145,7 +148,7 @@ exports.user_delete_DELETE = function(req, res) {
                                }
                            }
                        });
-                       return res.json({
+                       return res.status(200).json({
                            message: "Client Deleted Successfully",
                            result: result
                        })
@@ -157,7 +160,7 @@ exports.user_delete_DELETE = function(req, res) {
            //delete a user
            User.findByIdAndDelete(req.params.id, function (err, result) {
                if (err) {
-                   return res.json({
+                   return res.status(404).json({
                        message: "Unable to Delete User",
                        error: err
                    });
@@ -165,7 +168,7 @@ exports.user_delete_DELETE = function(req, res) {
                else {
                    userMiddleware.userProjects(req.params.id, function (projects) {
                        if (err) {
-                           return res.json({
+                           return res.status(404).json({
                                message: "Unable get Project",
                                error: err
                            });
@@ -176,7 +179,7 @@ exports.user_delete_DELETE = function(req, res) {
 
                            //});
                        }
-                       return res.json({
+                       return res.status(200).json({
                            message: "User of Project Deleted Successfully",
                            //result: [userArray]
                        });
@@ -192,6 +195,7 @@ exports.user_delete_DELETE = function(req, res) {
 exports.user_update_PUT = function(req, res) {
 
     const data ={
+        _projectId: req.body._projectId,
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
@@ -199,15 +203,17 @@ exports.user_update_PUT = function(req, res) {
     };
 
     const rules = {
+        _projectId: 'array',
         username: 'required|min:5',
         email: 'required|email',
-        password: 'required',
+        password: 'required|min:4|max:40',
         userType: 'required'
     };
 
     validate(data, rules)
         .then(() => {
             const user = new User({
+                _projectId: req.body._projectId,
                 username: req.body.username,
                 email: req.body.email,
                 password: req.body.password,
@@ -216,13 +222,13 @@ exports.user_update_PUT = function(req, res) {
 
             User.findByIdAndUpdate(req.params.id, data, {}, function (err, result) {
                 if (err) {
-                    return res.json({
+                    return res.status(404).json({
                         message: "Unable to Update User",
                         error: err
                     });
                 }
                 else {
-                    return res.json({
+                    return res.status(200).json({
                         message: "Updated Successfully",
                         result: result
                     });
@@ -230,7 +236,7 @@ exports.user_update_PUT = function(req, res) {
             });
         })
         .catch((errors) => {
-            return res.json({errors});
+            return res.status(403).json({errors});
         });
 };
 
@@ -242,13 +248,13 @@ exports.user_project_detail = function(req, res) {
         //"_projectId",
         function (err, result) {
             if (err) {
-                return res.json({
+                return res.status(404).json({
                     message: "Unable to get the User Project",
                     error: err
                 });
             }
             else {
-                return res.json(result);
+                return res.status(200).json(result);
             }
         }).
         populate({path: '_projectId', select: 'name'});
@@ -261,3 +267,30 @@ exports.user_project_detail = function(req, res) {
 //     //const userProjectId = UserProject(userId.find(''))
 //     console.log(userId);
 // };
+
+
+// Get the Project of a specific client
+exports.loggedIn_project = (req, res) => {
+
+    const {
+        userId,
+        projectId
+    } = req.params;
+
+
+    console.log(userId);
+
+    let logUser = Project.find({_userId: userId}, (err, project) => {
+        if(err)
+        {
+            return res.json({
+                status: "ERROR",
+                message: err
+            });
+        }
+        return res.status(200).json({
+            status: "OK",
+            data: project
+        })
+    })
+};

@@ -1,5 +1,6 @@
 const Phase = require('../Models/phase');
 
+// Get the Phases of a Project
 module.exports.projectPhases = function(projectId, callback) {
     console.log('method');
     var phases = [];

@@ -2,6 +2,7 @@
 
 const jwt = require('jsonwebtoken');
 
+// Acquire authentication for all the User Types
 exports.allMembers = (req, res, next) => {
 
     // Check header for token
@@ -38,7 +39,7 @@ exports.allMembers = (req, res, next) => {
 };
 
 
-//Token for Admin Only
+// Acquire authentication for Admin only
 exports.AdminOnly = function(req, res, next) {
     // Check header for token
     let token = req.headers['x-access-token'];
@@ -75,7 +76,7 @@ exports.AdminOnly = function(req, res, next) {
     }
 };
 
-
+// Acquire authentication for Admin and Project Manager only
 exports.AdminAndProManagerOnly = function(req, res, next) {
     // Check header for token
     let token = req.headers['x-access-token'];

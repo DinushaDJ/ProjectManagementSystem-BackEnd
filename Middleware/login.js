@@ -12,7 +12,7 @@ exports.signIn = function (req, res) {
         //If user not found
         if (err || !user) {
             console.log(user);
-            return res.json({
+            return res.status(401).json({
                 success: false,
                 message: 'Authentication failed. Wrong Username'
             });
@@ -78,14 +78,15 @@ exports.signIn = function (req, res) {
                         }
 
                         console.log(token);
-                        return res.json({
+                        return res.status(200).json({
                             success: true,
                             message: 'Login Successful',
-                            token: token
+                            token: token,
+                            user: user
                         });
                     }
                     else{
-                        return res.json({
+                        return res.status(401).json({
                             success: false,
                             message: 'Authentication failed. Wrong Password'
                         });

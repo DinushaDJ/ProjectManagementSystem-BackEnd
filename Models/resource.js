@@ -4,10 +4,6 @@ var Schema = mongoose.Schema;
 
 var recourceSchema = new Schema({
 
-    // _projectId: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Project'
-    // },
     name: {
         type: String,
         required: true
