@@ -30,20 +30,24 @@ userSchema.virtual('url').get(function () {
     return '/users'+this._id;
 });
 
-userSchema.pre('save', function(next, user){
-    //var user = this;
+userSchema.pre('save', function(next){
+    var user = this;
     if(this.isModified('password') || this.isNew){
         bcrypt.genSalt(10, function(err, salt){
-            if(err){
-                return next(err);
+            if(err)
+            {
+                throw new err;
             }
-            bcrypt.hash(user.password, salt, function(err, hash){
-                if(err){
+            bcrypt.hash(user.password, salt, function(err, hash)
+            {
+                if(err)
+                {
                     return next(err);
                 }
                 user.password = hash;
                 next();
             });
+            //next();
         });
     } else {
         return next();

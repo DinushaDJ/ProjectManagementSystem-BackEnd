@@ -8,10 +8,10 @@ var projectSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }],
-    _resourceId: {
+    _resourceId: [{
         type: Schema.Types.ObjectId,
         ref: 'Resource'
-    },
+    }],
     name: {
         type: String,
         required: true

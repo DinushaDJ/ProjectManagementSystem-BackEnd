@@ -41,7 +41,7 @@ exports.phase_detail = function(req, res) {
 
 
 // Handle Phase create on POST.
-exports.phase_create_post = function(req, res) {
+exports.phase_create_POST = function(req, res) {
 
     const data ={
         _projectId: req.body._projectId,
@@ -92,8 +92,8 @@ exports.phase_create_post = function(req, res) {
 };
 
 
-// Handle Phase delete on POST.
-exports.phase_delete_post = function(req, res) {
+// Handle Phase delete on DELETE.
+exports.phase_delete_DELETE = function(req, res) {
     Phase.findByIdAndDelete(req.params.id, function (err, result) {
         if (err) {
             return res.json({
@@ -120,8 +120,8 @@ exports.phase_delete_post = function(req, res) {
 };
 
 
-// Handle Phase update on POST.
-exports.phase_update_post = function(req, res) {
+// Handle Phase update on PUT.
+exports.phase_update_PUT = function(req, res) {
 
     const data = {
         _projectId: req.body._projectId,

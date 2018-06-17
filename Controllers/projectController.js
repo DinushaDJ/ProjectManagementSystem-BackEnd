@@ -47,7 +47,7 @@ exports.project_detail = function(req, res) {
 
 
 // Handle Project create on POST.
-exports.project_create_post = function(req, res) {
+exports.project_create_POST = function(req, res) {
 
     const data ={
         _userId: req.body._userId,
@@ -71,7 +71,7 @@ exports.project_create_post = function(req, res) {
         start_date: 'required|date',
         end_date: 'required|date',
         budget: 'required|number',
-        status: 'required|in: Complete,Not Complete, Ongoing',
+        status: 'required|in:Complete,Not Complete,Ongoing',
         percentageComplete: 'required',
         description: 'required'
     };
@@ -104,8 +104,8 @@ exports.project_create_post = function(req, res) {
 };
 
 
-// Handle Project delete on POST.
-exports.project_delete_post = function(req, res) {
+// Handle Project delete on DELETE.
+exports.project_delete_DELETE = function(req, res) {
 
     Project.findByIdAndDelete(req.params.id, function (err, result) {
         if (err) {
@@ -117,7 +117,7 @@ exports.project_delete_post = function(req, res) {
         else {
             projectMiddleware.projectPhases(req.params.id, function(phases) {
                 //delete all the phases of project specified by the passed project Id
-                Phase.deleteMany({'project': req.params.id}, function (err, result) {
+                Phase.deleteMany({'_projectId': req.params.id}, function (err, result) {
                     if (err) {
                         return res.json({
                             message: "Unable to Delete Phase",
@@ -148,8 +148,8 @@ exports.project_delete_post = function(req, res) {
 };
 
 
-// Handle Project update on POST.
-exports.project_update_post = function(req, res) {
+// Handle Project update on PUT.
+exports.project_update_PUT = function(req, res) {
 
     const data = {
         _userId: req.body._userId,
@@ -166,16 +166,16 @@ exports.project_update_post = function(req, res) {
     };
 
     const rules = {
-        _userId: 'required|alpha_numeric',
-        _resourceId: 'required|alpha_numeric',
+        _userId: 'required|array|alpha_numeric',
+        _resourceId: 'required|array|alpha_numeric',
         name: 'required',
         type: 'required',
         start_date: 'required|date',
         end_date: 'required|date',
         budget: 'required|number',
-        status: 'required|in: Complete,Not Complete, Ongoing',
+        status: 'required|in:Complete,Not Complete,Ongoing',
         percentageComplete: 'required',
-        description: 'required'
+        //description: ''
     };
 
     validate(data, rules)

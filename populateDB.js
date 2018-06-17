@@ -35,7 +35,7 @@ var users = [];
 function projectCreate(cb) {
 
     var project = new Project ({
-        _userId: [users[0]],
+        _userId: users[0],
         _resourceId: resources[0],
         name:'Project Management',
         type:'IT',
@@ -140,7 +140,7 @@ function phaseCreate(cb) {
 function userCreate(cb) {
 
     var user = new User({
-        username: 'DinusDJ',
+        username: 'DinushaDJ',
         email: 'dinusha.jayashan01@gmail.com',
         password: 'dinusha123',
         userType: 'Member'
@@ -164,7 +164,6 @@ function createUserResource(cb) {
                 resourceCreate(callback);
             },
             function (callback) {
-                console.log('User');
                 userCreate(callback);
             }
         ],

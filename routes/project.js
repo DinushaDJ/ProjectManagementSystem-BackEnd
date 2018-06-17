@@ -2,27 +2,28 @@ var express = require('express');
 var router = express.Router();
 
 var project_controller = require('../Controllers/projectController');
-var authentication = require('../authentication');
+var login_authentication = require('../authentication');
+//var authentication = require('../authentication').AdminOnly;
 //var projectMiddleware = require('../Middleware/project');
 
 
     /// PROJECT ROUTES ///
 
 
-// POST request for creating Task.
-router.post('/create', authentication, project_controller.project_create_post);//PM
+// POST request for creating Project.
+router.post('/create', login_authentication.allMembers, project_controller.project_create_POST);//Admin, PM
 
-// POST request to delete Task.
-router.delete('/:id/delete', authentication, project_controller.project_delete_post);//Admin, PM
+// POST request to delete Project.
+router.delete('/:id/delete', login_authentication.allMembers, project_controller.project_delete_DELETE);//Admin, PM
 
-// POST request to update Task.
-router.put('/:id/update', authentication, project_controller.project_update_post);//Admin, PM, Member
+// POST request to update Project.
+router.put('/:id/update', login_authentication.allMembers, project_controller.project_update_PUT);//Admin, PM, Member
 
-// GET request for one Task.
-router.get('/:id', authentication, project_controller.project_detail);//Admin
+// GET request for one Project.
+router.get('/:id', login_authentication.AdminAndProManagerOnly, project_controller.project_detail);//Admin,PM
 
-// GET request for list of all Task.
-router.get('/', project_controller.project_list);//Admin, PM
+// GET request for list of all Project.
+router.get('/', login_authentication.allMembers, project_controller.project_list);//Admin
 
 
 module.exports = router;

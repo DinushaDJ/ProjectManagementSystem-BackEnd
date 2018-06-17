@@ -1,6 +1,5 @@
 const Resource = require('../Models/resource');
-//const Project = require('../models/project');
-//const Phase = require('../models/phase');
+const resourceMiddleware = require('../Middleware/resource');
 
 const { validate } = require('indicative');
 
@@ -44,7 +43,7 @@ exports.resource_detail = function(req, res) {
 
 
 // Handle Resource create on POST.
-exports.resource_create_post = function(req, res) {
+exports.resource_create_POST = function(req, res) {
 
     const data ={
         name: req.body.name,
@@ -80,27 +79,37 @@ exports.resource_create_post = function(req, res) {
 };
 
 
-// Handle Resource delete on POST.
-exports.resource_delete_post = function(req, res) {
+// Handle Resource delete on DELETE.
+exports.resource_delete_DELETE = function(req, res) {
     Resource.findByIdAndDelete(req.params.id, function (err, result) {
         if (err) {
             return res.json({
-                message: "Unable to Delete Task",
+                message: "Unable to Delete Resource",
                 error: err
             });
         }
-        else{
+        resourceMiddleware.projectResources(req.params.id, function(resources) {
+            if (err) {
+                return res.json({
+                    message: "Unable to Delete Resource",
+                    error: err
+                });
+            }
+            //delete the resource Id from all the Projects
+            for(let i = 0; i < resources.length; i++) {
+                resourceMiddleware.deleteResourceIdFromProject(resources[i], req.params.id);
+            }
             return res.json({
                 message: "Deleted Successfully",
-                result: result
+                //result: [resourceArray]
             });
-        }
+        });
     });
 };
 
 
 // Handle Resource update on POST.
-exports.resource_update_post = function(req, res) {
+exports.resource_update_PUT = function(req, res) {
 
     const data = {
         name: req.body.name,

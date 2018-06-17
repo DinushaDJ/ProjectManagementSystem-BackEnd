@@ -40,6 +40,7 @@ exports.task_user_list = function(req, res) {
         }).populate('_projectId _phaseId');
 };
 
+
 // Display detail page for a specific Task.
 exports.task_detail = function(req, res) {
     Task.findById({'_id': req.params.id},
@@ -56,6 +57,7 @@ exports.task_detail = function(req, res) {
         }
     }).populate('employee phase');
 };
+
 
 // Display detail page for a specific Task.
 exports.task_detail = function(req, res) {
@@ -76,7 +78,7 @@ exports.task_detail = function(req, res) {
 
 
 // Handle Task create on POST.
-exports.task_create_post = function(req, res) {
+exports.task_create_POST = function(req, res) {
 
     const data ={
         //_projectId: req.body._projectId,
@@ -132,8 +134,8 @@ exports.task_create_post = function(req, res) {
 };
 
 
-// Handle Task delete on POST.
-exports.task_delete_post = function(req, res) {
+// Handle Task delete on DELETE.
+exports.task_delete_DELETE = function(req, res) {
     Task.findByIdAndDelete(req.params.id, function (err, result) {
         if (err) {
             return res.json({
@@ -151,8 +153,8 @@ exports.task_delete_post = function(req, res) {
 };
 
 
-// Handle Task update on POST.
-exports.task_update_post = function(req, res) {
+// Handle Task update on PUT.
+exports.task_update_PUT = function(req, res) {
 
     const data = {
         //_projectId: req.body._projectId,

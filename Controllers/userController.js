@@ -51,7 +51,7 @@ exports.user_detail = function(req, res) {
 
 
 // Handle User create on POST.
-exports.user_create_post = function(req, res) {
+exports.user_create_POST = function(req, res) {
 
     const data ={
         username: req.body.username,
@@ -62,7 +62,7 @@ exports.user_create_post = function(req, res) {
 
     const rules = {
         username: 'required|min:5',
-        email: 'required',
+        email: 'required|email',
         password: 'required',
         userType: 'required'
     };
@@ -75,9 +75,14 @@ exports.user_create_post = function(req, res) {
                 password: req.body.password,
                 userType: req.body.userType
             });
+
             user.save(function (err) {
-                if (err) {
-                    return res.json({err});
+                if (err)
+                {
+                    return res.json({
+                        error: err,
+                        message: "error"
+                    });
                 }
                 return res.json(user);
             });
@@ -88,15 +93,14 @@ exports.user_create_post = function(req, res) {
 };
 
 
-// Handle User delete on POST.
-exports.user_delete_post = function(req, res) {
+// Handle User delete on DELETE.
+exports.user_delete_DELETE = function(req, res) {
 
-    User.find({userType: req.body.userType}, function (err, user) {
+    User.find({userType: req.body.userType}, function (err, result) {
         //check if the user ia a client
-       if(user.userType === 'Client'){
+       if(req.body.userType === "Client"){
            //delete the user along with the projects, phases and tasks
            User.findByIdAndDelete(req.params.id, function (err, result) {
-
                if (err) {
                    return res.json({
                        message: "Unable to Delete User",
@@ -104,6 +108,7 @@ exports.user_delete_post = function(req, res) {
                    });
                }
                else {
+                   //console.log('Project');
                    userMiddleware.userProjects(req.params.id, function(projects) {
                        //delete all the phases of project specified by the passed project Id
                        Project.deleteMany({'_userId': req.params.id}, function (err, result) {
@@ -158,9 +163,23 @@ exports.user_delete_post = function(req, res) {
                    });
                }
                else {
-                   return res.json({
-                       message: "Deleted Successfully",
-                       result: result
+                   userMiddleware.userProjects(req.params.id, function (projects) {
+                       if (err) {
+                           return res.json({
+                               message: "Unable get Project",
+                               error: err
+                           });
+                       }
+                       for(let y=0; y < projects.length; y++){
+                           //Project.findByIdAndUpdate({'_id': projects[i]}, {$pull: {'_userId': req.params.id}}, function(req, res, result) {
+                           userMiddleware.deleteUserIdFromProject(projects[y], req.params.id);
+
+                           //});
+                       }
+                       return res.json({
+                           message: "User of Project Deleted Successfully",
+                           //result: [userArray]
+                       });
                    });
                }
            });
@@ -169,50 +188,71 @@ exports.user_delete_post = function(req, res) {
 };
 
 
-// Handle User update on POST.
-exports.user_update_post = function(req, res) {
+// Handle User update on PUT.
+exports.user_update_PUT = function(req, res) {
 
-    var task = new User(
-        {
+    const data ={
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        userType: req.body.userType
+    };
 
-        }
-    );
+    const rules = {
+        username: 'required|min:5',
+        email: 'required|email',
+        password: 'required',
+        userType: 'required'
+    };
 
-    User.findByIdAndUpdate(req.params.id, task, {}, function (err, result) {
-        if (err) {
-            return res.json({
-                message: "Unable to Update User",
-                error: err
+    validate(data, rules)
+        .then(() => {
+            const user = new User({
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password,
+                userType: req.body.userType
             });
-        }
-        else{
-            return res.json({
-                message: "Updated Successfully",
-                result: result
+
+            User.findByIdAndUpdate(req.params.id, data, {}, function (err, result) {
+                if (err) {
+                    return res.json({
+                        message: "Unable to Update User",
+                        error: err
+                    });
+                }
+                else {
+                    return res.json({
+                        message: "Updated Successfully",
+                        result: result
+                    });
+                }
             });
-        }
-    });
+        })
+        .catch((errors) => {
+            return res.json({errors});
+        });
 };
 
 
 //Display all the Projects of an specific User
-// exports.user_project_detail = function(req, res) {
-//
-//     UserProject.find({},{'_userId': req.params.id},
-//         //"_projectId",
-//         function (err, result) {
-//             if (err) {
-//                 return res.json({
-//                     message: "Unable to get the User Project",
-//                     error: err
-//                 });
-//             }
-//             else {
-//                 return res.json(result);
-//             }
-//         }).
-//         populate({path: '_projectId', select: 'name'});
-// };
+exports.user_project_detail = function(req, res) {
+
+    User.find({},{'_userId': req.params.id},
+        //"_projectId",
+        function (err, result) {
+            if (err) {
+                return res.json({
+                    message: "Unable to get the User Project",
+                    error: err
+                });
+            }
+            else {
+                return res.json(result);
+            }
+        }).
+        populate({path: '_projectId', select: 'name'});
+};
 
 
 // exports.user_project = function(req) {
