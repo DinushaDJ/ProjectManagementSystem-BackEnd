@@ -174,15 +174,6 @@ function createUserResource(cb) {
         cb);
 }
 
-// function createUser(cb) {
-//     async.parallel([
-//             function(callback) {
-//                 userCreate(callback);
-//             }
-//         ],
-//         // optional callback
-//         cb);
-// }
 
 function createProject(cb) {
     async.parallel([

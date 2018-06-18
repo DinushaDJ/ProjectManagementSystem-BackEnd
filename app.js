@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const cors = require('cors');
 
 var projectRouter = require('./routes/project');
 var phaseRouter = require('./routes/phase');
@@ -13,6 +13,8 @@ var loginRouter = require('./routes/login');
 var userRouter = require('./routes/user');
 
 var app = express();
+
+app.use(cors());
 
 //Import the mongoose module
 var mongoose = require('mongoose');

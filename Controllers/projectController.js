@@ -211,6 +211,8 @@ exports.project_update_PUT = function(req, res) {
 
     validate(data, rules)
         .then(() => {
+            console.log(req.body._userId);
+
             Project.findByIdAndUpdate(req.params.id, data, function (err, result) {
                 if (err) {
                     return res.status(404).json({

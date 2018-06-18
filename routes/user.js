@@ -31,7 +31,7 @@ router.get('/', authentication.AdminOnly, user_controller.user_list);//Admin
 //router.get('/:id/projects', userMiddleware.userProjects);
 
 //
-router.get('/:userId/projects', user_controller.loggedIn_project);
+router.get('/:userId/projects', authentication.allMembers, user_controller.loggedIn_project);
 
 //
 router.get('/:userId/projects/:id', project_controller.project_detail);

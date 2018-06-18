@@ -100,9 +100,10 @@ exports.user_create_POST = function(req, res) {
 exports.user_delete_DELETE = function(req, res) {
 
     User.find({userType: req.body.userType}, function (err, result) {
+
         //check if the user ia a client
-       if(req.body.userType === "Client"){
-           //delete the user along with the projects, phases and tasks
+       if(userType === "Client"){
+           //delete the User along with the projects, phases and tasks
            User.findByIdAndDelete(req.params.id, function (err, result) {
                if (err) {
                    return res.status(404).json({
@@ -261,16 +262,9 @@ exports.user_project_detail = function(req, res) {
 };
 
 
-// exports.user_project = function(req) {
-//     const userId = User.findById('_id',req.params.id);
-//
-//     //const userProjectId = UserProject(userId.find(''))
-//     console.log(userId);
-// };
-
-
 // Get the Project of a specific client
 exports.loggedIn_project = (req, res) => {
+
 
     const {
         userId,

@@ -3,23 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="5d951368-0623-4b43-a0e2-72e42bc7f5b8" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/phaseController.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/phaseController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/projectController.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/projectController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/resourceController.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/resourceController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/taskController.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/taskController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/userController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/project.js" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/project.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/phase.js" beforeDir="false" afterPath="$PROJECT_DIR$/Models/phase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/project.js" beforeDir="false" afterPath="$PROJECT_DIR$/Models/project.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/Models/resource.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/Models/task.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/Models/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/authentication.js" beforeDir="false" afterPath="$PROJECT_DIR$/authentication.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/populateDB.js" beforeDir="false" afterPath="$PROJECT_DIR$/populateDB.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/project.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/project.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -46,11 +37,11 @@
     <window id="3">
       <content type="file-editors">
         <state>
-          <leaf>
-            <file leaf-file-name="project.js" pinned="false" current-in-tab="false">
+          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+            <file leaf-file-name="project.js" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/Models/project.js">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="-40">
+                  <state relative-caret-position="320">
                     <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
                   </state>
                 </provider>
@@ -68,26 +59,8 @@
             <file leaf-file-name="resource.js" pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/Models/resource.js">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="57">
+                  <state relative-caret-position="100">
                     <caret line="5" selection-start-line="5" selection-end-line="5" />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="projectController.js" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/Controllers/projectController.js">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="160">
-                    <caret line="208" column="10" selection-start-line="208" selection-start-column="10" selection-end-line="208" selection-end-column="10" />
-                    <folding>
-                      <element signature="e#407#917#0" />
-                      <element signature="e#1012#1641#0" />
-                      <element signature="e#1698#2323#0" />
-                      <element signature="e#2410#4296#0" />
-                      <element signature="e#4387#5967#0" />
-                      <element signature="e#7732#8262#0" />
-                      <element signature="e#8361#9093#0" />
-                    </folding>
                   </state>
                 </provider>
               </entry>
@@ -95,8 +68,8 @@
             <file leaf-file-name="project.js" pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/routes/project.js">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="760">
-                    <caret line="53" column="2" selection-start-line="53" selection-start-column="2" selection-end-line="53" selection-end-column="2" />
+                  <state relative-caret-position="274">
+                    <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
                   </state>
                 </provider>
               </entry>
@@ -113,7 +86,7 @@
             <file leaf-file-name="task.js" pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/Models/task.js">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="-20">
+                  <state relative-caret-position="100">
                     <caret line="5" selection-start-line="5" selection-end-line="5" />
                   </state>
                 </provider>
@@ -139,11 +112,8 @@
       <file leaf-file-name="test.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1275">
+            <state relative-caret-position="720">
               <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="46" selection-end-column="7" />
-              <folding>
-                <element signature="e#321#791#0" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -164,40 +134,51 @@
       <file leaf-file-name="authentication.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/authentication.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="78" column="39" selection-start-line="78" selection-start-column="39" selection-end-line="78" selection-end-column="39" />
+            <state relative-caret-position="820">
+              <caret line="74" column="40" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
               <folding>
-                <element signature="e#94#986#0" />
-                <element signature="e#1058#1993#0" />
-                <element signature="e#2055#3004#0" />
+                <element signature="e#143#1035#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="taskController.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Controllers/taskController.js">
+      <file leaf-file-name="user.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/user.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="171" column="45" selection-start-line="171" selection-start-column="45" selection-end-line="171" selection-end-column="45" />
-              <folding>
-                <element signature="e#146#547#0" />
-                <element signature="e#603#988#0" />
-                <element signature="e#1060#1486#0" />
-                <element signature="e#1575#2011#0" />
-                <element signature="e#2092#3815#0" />
-                <element signature="e#3900#4280#0" />
-                <element signature="e#4359#5878#0" />
-              </folding>
+            <state relative-caret-position="458">
+              <caret line="32" column="2" lean-forward="true" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="2" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="userController.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="userController.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Controllers/userController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="53" column="46" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
+            <state relative-caret-position="104">
+              <caret line="99" column="48" selection-start-line="99" selection-start-column="48" selection-end-line="99" selection-end-column="48" />
+              <folding>
+                <element signature="e#433#862#0" />
+                <element signature="e#935#1396#0" />
+                <element signature="e#1477#2631#0" />
+                <element signature="e#2716#11277#0" />
+                <element signature="e#7236#9952#0" />
+                <element signature="e#10076#11258#0" />
+                <element signature="e#7137#8497#0" />
+                <element signature="e#7366#7543#0" />
+                <element signature="e#7628#7865#0" />
+                <element signature="e#8597#9054#0" />
+                <element signature="e#9338#9758#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -205,17 +186,8 @@
       <file leaf-file-name="login.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Middleware/login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="75" column="25" selection-start-line="75" selection-start-column="25" selection-end-line="75" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="project.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Middleware/project.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="2" column="30" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+            <state relative-caret-position="1380">
+              <caret line="69" column="56" selection-start-line="69" selection-start-column="56" selection-end-line="69" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -233,18 +205,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="phaseController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Controllers/phaseController.js">
+      <file leaf-file-name="projectController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Controllers/projectController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="177" column="46" selection-start-line="177" selection-start-column="46" selection-end-line="177" selection-end-column="46" />
+            <state relative-caret-position="117">
+              <caret line="180" column="48" selection-start-line="180" selection-start-column="48" selection-end-line="180" selection-end-column="48" />
               <folding>
-                <element signature="e#200#652#0" />
-                <element signature="e#727#1209#0" />
-                <element signature="e#1292#2889#0" />
-                <element signature="e#2976#3721#0" />
-                <element signature="e#3802#5188#0" />
-                <element signature="e#5275#5776#0" />
+                <element signature="e#407#917#0" />
+                <element signature="e#1012#1641#0" />
+                <element signature="e#1698#2323#0" />
+                <element signature="e#2410#4296#0" />
+                <element signature="e#4387#5967#0" />
+                <element signature="e#6052#7694#0" />
+                <element signature="e#7788#8318#0" />
+                <element signature="e#8417#9149#0" />
               </folding>
             </state>
           </provider>
@@ -288,7 +262,6 @@
         <option value="$PROJECT_DIR$/permission.js" />
         <option value="$PROJECT_DIR$/routes/login.js" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/Middleware/resource.js" />
         <option value="$PROJECT_DIR$/routes/phase.js" />
         <option value="$PROJECT_DIR$/routes/resource.js" />
@@ -297,20 +270,21 @@
         <option value="$PROJECT_DIR$/Models/project.js" />
         <option value="$PROJECT_DIR$/Models/phase.js" />
         <option value="$PROJECT_DIR$/Models/user.js" />
-        <option value="$PROJECT_DIR$/populateDB.js" />
-        <option value="$PROJECT_DIR$/routes/project.js" />
-        <option value="$PROJECT_DIR$/routes/user.js" />
-        <option value="$PROJECT_DIR$/Controllers/userController.js" />
         <option value="$PROJECT_DIR$/Controllers/phaseController.js" />
         <option value="$PROJECT_DIR$/Controllers/resourceController.js" />
         <option value="$PROJECT_DIR$/Controllers/taskController.js" />
         <option value="$PROJECT_DIR$/Models/task.js" />
         <option value="$PROJECT_DIR$/Models/resource.js" />
-        <option value="$PROJECT_DIR$/Middleware/login.js" />
         <option value="$PROJECT_DIR$/Middleware/project.js" />
-        <option value="$PROJECT_DIR$/Controllers/projectController.js" />
         <option value="$PROJECT_DIR$/test/test.js" />
+        <option value="$PROJECT_DIR$/Controllers/projectController.js" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/Middleware/login.js" />
+        <option value="$PROJECT_DIR$/routes/project.js" />
         <option value="$PROJECT_DIR$/authentication.js" />
+        <option value="$PROJECT_DIR$/routes/user.js" />
+        <option value="$PROJECT_DIR$/populateDB.js" />
+        <option value="$PROJECT_DIR$/Controllers/userController.js" />
       </list>
     </option>
   </component>
@@ -339,8 +313,9 @@
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="522" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="495" />
+    <option name="y" value="6" />
     <option name="width" value="876" />
     <option name="height" value="775" />
   </component>
@@ -352,6 +327,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -363,7 +339,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -410,7 +385,9 @@
       <workItem from="1529035819328" duration="109037000" />
       <workItem from="1529218204553" duration="36000" />
       <workItem from="1529218266463" duration="271000" />
-      <workItem from="1529218644606" duration="47894000" />
+      <workItem from="1529218644606" duration="50103000" />
+      <workItem from="1529278802531" duration="9769000" />
+      <workItem from="1529320645530" duration="10854000" />
     </task>
     <task id="LOCAL-00001" summary="Created and Updated Model Files">
       <created>1528633972889</created>
@@ -461,11 +438,18 @@
       <option name="project" value="LOCAL" />
       <updated>1529235824725</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Updated Controllers,&#10;Updated Routes and route authentication,&#10;Added Status Code for all&#10;COMPLETE: Testing">
+      <created>1529272000537</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1529272000537</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="262207000" />
+    <option name="totallyTimeSpent" value="285039000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -478,39 +462,41 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32967034" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.329582" />
-      <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32967034" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.45356038" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1732224" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32817337" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.27089784" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15204236" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.32980332" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.3111455" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3124019" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32967034" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32967034" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info id="npm" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20955883" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32967034" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.329582" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" id="Database" order="3" />
@@ -518,9 +504,8 @@
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32967034" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info id="Favorites" order="3" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -537,11 +522,12 @@
     <MESSAGE value="Updated Controllers and User Routes" />
     <MESSAGE value="Updated Controllers: &#10;    Added: delete-&gt;client/project/phase/task&#10;           delete-&gt;project/phase/task&#10;Updated Routes(separated the routes into several files):&#10;    Added: login&#10;Added test file; login, project, user Middleware and user authentication" />
     <MESSAGE value="Updated Controllers: &#10;    Added: delete(Array)-&gt;client/project/phase/task&#10;           delete(Array)-&gt;resource/project&#10;Updated Routes&#10;Added resource Middleware&#10;COMPLETE: ROLE based authentication &amp; Login" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Controllers: &#10;    Added: delete(Array)-&gt;client/project/phase/task&#10;           delete(Array)-&gt;resource/project&#10;Updated Routes&#10;Added resource Middleware&#10;COMPLETE: ROLE based authentication &amp; Login" />
+    <MESSAGE value="Updated Controllers,&#10;Updated Routes and route authentication,&#10;Added Status Code for all&#10;COMPLETE: Testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Controllers,&#10;Updated Routes and route authentication,&#10;Added Status Code for all&#10;COMPLETE: Testing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="60" />
+      <option name="time" value="65" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -659,27 +645,6 @@
       </provider>
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/javascript/nodejs/8.9.1/core-modules/async_hooks.js" />
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-582">
-          <caret line="20" column="15" lean-forward="true" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/populateDB.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="207" column="15" lean-forward="true" selection-start-line="207" selection-start-column="15" selection-end-line="207" selection-end-column="15" />
-          <folding>
-            <element signature="n#!!block;n#projectCreate#0" />
-            <element signature="n#!!block;n#resourceCreate#0" />
-            <element signature="n#!!block;n#taskCreate#0" />
-            <element signature="n#!!block;n#phaseCreate#0" />
-            <element signature="n#!!block;n#userCreate#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/resource.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="229">
@@ -701,74 +666,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="33" column="59" lean-forward="true" selection-start-line="33" selection-start-column="59" selection-end-line="33" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Controllers/phaseController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
+        <state relative-caret-position="3540">
           <caret line="177" column="46" selection-start-line="177" selection-start-column="46" selection-end-line="177" selection-end-column="46" />
-          <folding>
-            <element signature="e#200#652#0" />
-            <element signature="e#727#1209#0" />
-            <element signature="e#1292#2889#0" />
-            <element signature="e#2976#3721#0" />
-            <element signature="e#3802#5188#0" />
-            <element signature="e#5275#5776#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Models/task.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-20">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Models/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Models/project.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-40">
-          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Models/phase.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controllers/userController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="53" column="46" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Models/resource.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
@@ -776,27 +677,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="111" column="49" selection-start-line="111" selection-start-column="49" selection-end-line="111" selection-end-column="49" />
-          <folding>
-            <element signature="e#234#640#0" />
-            <element signature="e#737#1167#0" />
-            <element signature="e#1256#2117#0" />
-            <element signature="e#2210#3080#0" />
-            <element signature="e#3168#4134#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/project.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="53" column="2" selection-start-line="53" selection-start-column="2" selection-end-line="53" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Middleware/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="75" column="25" selection-start-line="75" selection-start-column="25" selection-end-line="75" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -818,6 +698,86 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test/test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="46" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Models/project.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Models/phase.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Models/resource.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Models/task.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controllers/taskController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="166" column="7" lean-forward="true" selection-start-line="166" selection-start-column="7" selection-end-line="166" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Middleware/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1380">
+          <caret line="69" column="56" selection-start-line="69" selection-start-column="56" selection-end-line="69" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authentication.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="820">
+          <caret line="74" column="40" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+          <folding>
+            <element signature="e#143#1035#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Models/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Middleware/user.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -829,56 +789,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/project.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="458">
+          <caret line="32" column="2" lean-forward="true" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Controllers/projectController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="208" column="10" selection-start-line="208" selection-start-column="10" selection-end-line="208" selection-end-column="10" />
+        <state relative-caret-position="117">
+          <caret line="180" column="48" selection-start-line="180" selection-start-column="48" selection-end-line="180" selection-end-column="48" />
           <folding>
             <element signature="e#407#917#0" />
             <element signature="e#1012#1641#0" />
             <element signature="e#1698#2323#0" />
             <element signature="e#2410#4296#0" />
             <element signature="e#4387#5967#0" />
-            <element signature="e#7732#8262#0" />
-            <element signature="e#8361#9093#0" />
+            <element signature="e#6052#7694#0" />
+            <element signature="e#7788#8318#0" />
+            <element signature="e#8417#9149#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/test.js">
+    <entry file="file://$PROJECT_DIR$/populateDB.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1275">
-          <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="46" selection-end-column="7" />
-          <folding>
-            <element signature="e#321#791#0" />
-          </folding>
+        <state relative-caret-position="1279">
+          <caret line="175" lean-forward="true" selection-start-line="175" selection-end-line="175" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/authentication.js">
+    <entry file="file://$PROJECT_DIR$/Controllers/userController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="78" column="39" selection-start-line="78" selection-start-column="39" selection-end-line="78" selection-end-column="39" />
+        <state relative-caret-position="104">
+          <caret line="99" column="48" selection-start-line="99" selection-start-column="48" selection-end-line="99" selection-end-column="48" />
           <folding>
-            <element signature="e#94#986#0" />
-            <element signature="e#1058#1993#0" />
-            <element signature="e#2055#3004#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controllers/taskController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="171" column="45" selection-start-line="171" selection-start-column="45" selection-end-line="171" selection-end-column="45" />
-          <folding>
-            <element signature="e#146#547#0" />
-            <element signature="e#603#988#0" />
-            <element signature="e#1060#1486#0" />
-            <element signature="e#1575#2011#0" />
-            <element signature="e#2092#3815#0" />
-            <element signature="e#3900#4280#0" />
-            <element signature="e#4359#5878#0" />
+            <element signature="e#433#862#0" />
+            <element signature="e#935#1396#0" />
+            <element signature="e#1477#2631#0" />
+            <element signature="e#2716#11277#0" />
+            <element signature="e#7236#9952#0" />
+            <element signature="e#10076#11258#0" />
+            <element signature="e#7137#8497#0" />
+            <element signature="e#7366#7543#0" />
+            <element signature="e#7628#7865#0" />
+            <element signature="e#8597#9054#0" />
+            <element signature="e#9338#9758#0" />
           </folding>
         </state>
       </provider>

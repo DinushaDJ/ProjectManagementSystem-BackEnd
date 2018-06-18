@@ -68,10 +68,11 @@ exports.AdminOnly = function(req, res, next) {
         });
     }
     else {
+        console.log("Error");
         // No token
         return res.status(401).json({
             success: false,
-            message: 'Unauthorised'
+            message: 'Unauthorised Token'
         });
     }
 };
