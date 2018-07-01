@@ -16,6 +16,7 @@ module.exports.userProjects = function(userId, callback) {
 };
 
 
+//Delete a User Id from a Project
 module.exports.deleteUserIdFromProject = function(projId, userId) {
 
     Project.findById({'_id': projId}, '_userId', function (err, result) {

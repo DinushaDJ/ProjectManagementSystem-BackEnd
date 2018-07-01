@@ -77,6 +77,7 @@ exports.AdminOnly = function(req, res, next) {
     }
 };
 
+
 // Acquire authentication for Admin and Project Manager only
 exports.AdminAndProManagerOnly = function(req, res, next) {
     // Check header for token

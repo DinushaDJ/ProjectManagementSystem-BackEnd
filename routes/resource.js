@@ -21,7 +21,10 @@ router.put('/:id/update', authentication.allMembers, resource_controller.resourc
 router.get('/:id', authentication.AdminAndProManagerOnly, resource_controller.resource_detail);//Admin, PM
 
 // GET request for list of all Task.
-router.get('/', authentication.AdminOnly, resource_controller.resource_list);//Admin
+router.get('/',
+    //authentication.AdminOnly,
+    resource_controller.resource_list
+);//Admin
 
 
 module.exports = router;

@@ -17,10 +17,18 @@ var login_authentication = require('../authentication');
 
 
 // POST request for creating Project.
-router.post('/create', login_authentication.AdminAndProManagerOnly, project_controller.project_create_POST);//Admin, PM
+router.post(
+    '/create',
+    login_authentication.AdminAndProManagerOnly,
+    project_controller.project_create_POST
+);//Admin, PM
 
 // POST request to delete Project.
-router.delete('/:id/delete', login_authentication.AdminAndProManagerOnly, project_controller.project_delete_DELETE);//Admin, PM
+router.delete(
+    '/:id/delete',
+    //login_authentication.AdminAndProManagerOnly,
+    project_controller.project_delete_DELETE
+);//Admin, PM
 
 // POST request to update Project.
 router.put('/:id/update', login_authentication.allMembers, project_controller.project_update_PUT);//Admin, PM, Member
@@ -29,7 +37,11 @@ router.put('/:id/update', login_authentication.allMembers, project_controller.pr
 router.get('/:id', login_authentication.AdminAndProManagerOnly, project_controller.project_detail);//Admin,PM
 
 // GET request for list of all Project.
-router.get('/', login_authentication.AdminOnly, project_controller.project_list);//Admin
+router.get(
+    '/',
+    //login_authentication.AdminOnly,
+    project_controller.project_list
+);//Admin
 
 // GET all the phases of a Project
 router.get('/:id/phases', project_controller.project_phase_list);
@@ -38,11 +50,10 @@ router.get('/:id/phases', project_controller.project_phase_list);
 router.get('/:id/phases/:id', phaseController.phase_detail);
 
 // GET all the tasks of a specific Phase from Project
-//router.get('/:id/phases/:id/tasks', project_controller.project_phase_list, phaseController.phase_task_list);
+router.get('/:id/phases/:id/tasks', phaseController.phase_task_list);
 
 // GET the tasks of a specific phase and specific project
-//router.get('/:id/phases/:id/tasks/:id', taskController.task_detail);
-
+router.get('/:id/phases/:id/tasks/:id', taskController.task_detail);
 
 
 // GET all the tasks of a specific Phase from Project

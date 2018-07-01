@@ -6,6 +6,7 @@ var user_controller = require('../Controllers/userController');
 //var userMiddleware = require('../Middleware/user');
 var project_controller = require('../Controllers/projectController');
 
+
     /// USER ROUTES ///
 
 
@@ -30,10 +31,12 @@ router.get('/', authentication.AdminOnly, user_controller.user_list);//Admin
 //Get the projects of a LoggedIn User
 //router.get('/:id/projects', userMiddleware.userProjects);
 
-//
-router.get('/:userId/projects', authentication.allMembers, user_controller.loggedIn_project);
+//Get the projects of a logged In User
+router.get('/:userId/projects',
+            //authentication.allMembers,
+            user_controller.loggedIn_project);
 
-//
+//Get project details of a logged In User
 router.get('/:userId/projects/:id', project_controller.project_detail);
 
 

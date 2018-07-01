@@ -50,7 +50,7 @@ exports.project_detail = function(req, res) {
 };
 
 
-//
+// Get Phase details of a specific Project
 exports.project_phase_detail = function(req, res) {
     Project.findById({'_id': req.params.id},
         "_id _userId _resourceId _phaseId name type start_date end_date budget status percentageComplete description deletedAt"
@@ -236,7 +236,7 @@ exports.project_update_PUT = function(req, res) {
 
 
 // Get the phases of a specific project
- exports.project_phase_list = function (req, res) {
+exports.project_phase_list = function (req, res) {
 
     Project.findById({'_id': req.params.id} , '_phaseId'
         , function (err, result) {

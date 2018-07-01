@@ -9,7 +9,11 @@ var phase_controller = require('../Controllers/phaseController');
 
 
 // POST request for creating Task.
-router.post('/create', authentication.AdminAndProManagerOnly, phase_controller.phase_create_POST);//Admin, PM
+router.post(
+    '/create',
+    //authentication.AdminAndProManagerOnly,
+    phase_controller.phase_create_POST
+);//Admin, PM
 
 // POST request to delete Task.
 router.delete('/:id/delete', authentication.AdminAndProManagerOnly, phase_controller.phase_delete_DELETE);//Admin, PM
@@ -21,7 +25,11 @@ router.put('/:id/update', authentication.allMembers, phase_controller.phase_upda
 router.get('/:id', authentication.AdminAndProManagerOnly, phase_controller.phase_detail);//Admin, PM
 
 // GET request for list of all Task.
-router.get('/', authentication.AdminOnly, phase_controller.phase_list);//Admin
+router.get(
+    '/',
+    //authentication.AdminOnly,
+    phase_controller.phase_list
+);//Admin
 
 
 module.exports = router;
